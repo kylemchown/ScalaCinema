@@ -1,5 +1,5 @@
 @import play.api.libs.json.JsValue
-@(message: String)(response: JsValue)
+@(message: String)(response: String)
 
 
 @main("Welcome to Play") {
@@ -42,8 +42,10 @@
             }
     </style>
 }{
+    @for(i <- 0 to response.split("},").length -2){
+        <img src=https://image.tmdb.org/t/p/w500/@response.split("},")(i).split("poster_path\":\"")(1).split("\",\"")(0).substring(1) alt="Chicago">
+    }
 
-    <h1>@(response \ "results")</h1>
 
 
 
