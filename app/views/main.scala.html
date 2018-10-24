@@ -9,6 +9,7 @@
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
         <link rel="stylesheet" href="@routes.Assets.at("stylesheets/footer.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
         <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -18,42 +19,42 @@
         @content
     <footer>
         <div class="ContactBar">
-        <ul id="ContactInfoList">
-            <li class="li1">
-                <div class="ContactIteam" id="contact">
-                    <h1>Contact Us</h1>
-                    <p>
-                        Tel : 07709987<br/>
-                        emal : QaCinema&#64;qacinam.com<br/>
-                        FAQ
-                    </p>
-                </div>
-            </li>
-            <li><div class="vl"></div></li>
-            <li class="li1">
-                <div class="ContactIteam" id="Social">
-                    <h1>Social</h1>
-                    <p>
-                    socailmedia<br/>
-                        socailmedia<br/>
-                        socialmedia<br/>
-                    </p>
-                </div>
-            </li>
-            <li><div class="vl"></div></li>
-            <li class="li1">
-                <div class="ContactIteam" id="address">
-                    <address>
-                        <h1>Address</h1>
+            <ul id="ContactInfoList">
+                <li class="li1">
+                    <div class="ContactItem">
+                        <h1>Contact Us</h1>
                         <p>
-                            34/3 bernard street<br/>
-                            Edinburgh<br/>
-                            EH6 6PR
+                            Tel : 07709987<br/>
+                            emal : QaCinema&#64;qacinema.com<br/>
+                                <a>FAQ</a>
                         </p>
-                    </address>
-                </div>
-            </li>
-        </ul>
+                    </div>
+                </li>
+                <li><div class="vl"></div></li>
+                <li class="li1">
+                    <div class="ContactItem">
+                        <h1>Social</h1>
+                        <p>
+                            <a><i class="fa fa-facebook"></i> Facebook</a><br/>
+                            <a><i class="fa fa-twitter"></i> Twitter</a><br/>
+                            <a><i class="fa fa-instagram"></i> Instagram</a><br/>
+                        </p>
+                    </div>
+                </li>
+                <li><div class="vl"></div></li>
+                <li class="li1">
+                    <div class="ContactItem">
+                        <address>
+                            <h1>Address</h1>
+                            <p>
+                                34/3 bernard street<br/>
+                                Edinburgh<br/>
+                                EH6 6PR
+                            </p>
+                        </address>
+                    </div>
+                </li>
+            </ul>
         </div>
     </footer>
     </body>
