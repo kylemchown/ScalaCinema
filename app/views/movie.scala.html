@@ -1,0 +1,8 @@
+@(moviedata: String)
+
+<h2>@moviedata</h2>
+
+
+@for(i <- moviedata.split("],")) {
+    <p>@i.contains("genre")</p>
+}

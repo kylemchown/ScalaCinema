@@ -1,12 +1,16 @@
 package controllers
 
-import play.api._
+import models.GetMovies
 import play.api.mvc._
 
 class Application extends Controller {
 
   def index = Action {
     Ok(views.html.index("Your new application is ready."))
+  }
+
+  def movieinfo(id: String) = Action {
+    Ok(views.html.movie(GetMovies.movieDetails(id)))
   }
 
 }
