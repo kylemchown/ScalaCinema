@@ -1,0 +1,21 @@
+
+.NavBar{
+    width: 100%;
+    background-color: yellow;
+}
+#iteamList {
+    list-style-type: none;
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+
+}
+#iteamList li{
+    float: left;
+
+}
+#iteamList li a{
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+}
