@@ -1,16 +1,13 @@
 .ContactBar{
     width: 100%;
-    background-color: #0C2946;
-}
-.ContactBar:hover {
-
+    background-color: #000000;
 }
 #ContactInfoList{
     overflow: hidden;
     list-style-type: none;
 }
 #ContactInfoList li{
-    margin: 20px;
+    margin: 1%;
     float: left;
 }
 .li1{
@@ -21,7 +18,7 @@
     margin-right: auto;
     margin-left: auto;
     vertical-align: center;
-    color: white;
+    color: #FFFFFF;
 }
 .ContactItem a{
     color: #FFFFFF;
