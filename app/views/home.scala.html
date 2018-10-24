@@ -43,7 +43,28 @@
     </style>
 }{
     @for(i <- 0 to response.split("},").length -2){
-        <img src=https://image.tmdb.org/t/p/w500/@response.split("},")(i).split("poster_path\":\"")(1).split("\",\"")(0).substring(1) alt="Chicago">
+        @if(i == 0) {
+            <div class="container">
+                <div class="row">
+        }
+        @if(i%3 == 0 && i!= 0){
+        </div>
+        </div><br>
+
+            <div class="container">
+                <div class="row">
+        }
+        @if(i == response.split("},").length -2){
+        </div>
+        </div><br>
+        }
+        <div class="col-sm-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">aaa</div>
+            <div class="panel-body"><img src=https://image.tmdb.org/t/p/w500/@response.split("},")(i).split("poster_path\":\"")(1).split("\",\"")(0).substring(1) class="img-responsive" style="width:100%" alt="Image"></div>
+            <div class="panel-footer">aaa</div>
+        </div>
+        </div>
     }
 
 
