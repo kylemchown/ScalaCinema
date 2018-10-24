@@ -54,10 +54,7 @@
             <div class="container">
                 <div class="row">
         }
-        @if(i == response.split("},").length -2){
-        </div>
-        </div><br>
-        }
+
         <div class="col-sm-4">
         <div class="panel panel-primary">
             <div class="panel-heading">aaa</div>
@@ -65,7 +62,16 @@
             <div class="panel-footer">aaa</div>
         </div>
         </div>
+        @if(i == response.split("},").length -2){
+        </div>
+        </div><br>
+        }
     }
+
+    @for(i <- 0 to response.split("},").length -2){
+        <h1>https://image.tmdb.org/t/p/w500/@response.split("},")(i).split("backdrop_path\":")(1).split(",\"")(0).substring(2).dropRight(1)</h1>
+    }
+
 
 
 
@@ -84,17 +90,33 @@
 
             <!-- Wrapper for slides -->
         <div class="carousel-inner">
-            <div class="item active">
-                <img src="@routes.Assets.at("images/img1.jpeg")" alt="Los Angeles">
-            </div>
 
-            <div class="item">
-                <img src="@routes.Assets.at("images/img2.jpeg")" alt="Chicago">
-            </div>
 
-            <div class="item">
-                <img src="@routes.Assets.at("images/img3.jpeg")" alt="New York">
-            </div>
+            @for(i <- 0 to response.split("},").length -2){
+                @if(i==0 && response.split("},")(i).split("backdrop_path\":")(1).split(",\"")(0).substring(1).length > 5) {
+                    <div class="item active">
+                        <img src=https://image.tmdb.org/t/p/w500/@response.split("},")(i).split("backdrop_path\":")(1).split(",\"")(0).substring(2).dropRight(1) alt="Chicago">
+                    </div>
+                }
+                @if(i!=0 && response.split("},")(i).split("backdrop_path\":")(1).split(",\"")(0).substring(1).length > 5){
+                    <div class="item">
+                        <img src=https://image.tmdb.org/t/p/w500/@response.split("},")(i).split("backdrop_path\":")(1).split(",\"")(0).substring(2).dropRight(1) alt="Chicago">
+                    </div>
+                }
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
 
             <!-- Left and right controls -->
