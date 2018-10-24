@@ -1,0 +1,24 @@
+.ContactBar{
+    width: 100%;
+}
+#ContactInfoList{
+    overflow: hidden;
+    list-style-type: none;
+}
+#ContactInfoList li{
+    margin: 20px;
+    float: left;
+}
+.li1{
+    width: 29%;
+}
+.ContactIteam{
+    text-align: center;
+}
+.vl{
+    border: 0px;
+    border-left: 1px ;
+    border-style: solid;
+    height: 130px;
+    text-align: center;
+}
