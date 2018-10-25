@@ -24,11 +24,19 @@ footer {
 
 }
 
+.panel-body{
+    background-color: black;
 
+}
+
+.panel-primary{
+    border-color: #000000;
+}
 
 
 .everything{
     background-color: #000000;
+
 }
 
 .carousel-content {
@@ -62,9 +70,11 @@ footer {
     width: 100%;
     opacity: 0;
     transition: .5s ease;
-    background-color: #008CBA;
+    background-color: #000000;
 }
 
 .abc:hover .overlay {
-    opacity: 0.5;
+    opacity: 0.8;
 }
+
+
