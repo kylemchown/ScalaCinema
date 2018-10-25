@@ -39,6 +39,9 @@ object GetMovies {
     println(movieData \\ "runtime")
     val runtime = (movieData \\ "runtime").head
 
+    val backdrop = (movieData \\ "backdrop_path").head
+    println(backdrop)
+
     println((videoData \\ "key"))
     val video = (videoData \\ "key").head
     println(video)
@@ -46,9 +49,13 @@ object GetMovies {
     //    val map = Map("title" -> title, "genre" -> genre, "overview" -> overview,
     //      "poster" -> poster, "release" -> release, "runtime" -> runtime, "video" -> video)
 
-    var map = scala.collection.immutable.Seq(title, overview, poster, release, runtime, video, genre.head)
+    var map = scala.collection.immutable.Seq(title, overview, poster, release, runtime, video, backdrop)
     //    val map = (title, overview)
-    if (genre.length > 1) map += title
+    //    if (genre.length > 1) map = map :+ genre(1)
+    //    (genre.length) match {
+    //      case
+    //    }
+    genre.foreach(x => map = map :+ x)
     Json.toJson(map).toString()
   }
 
