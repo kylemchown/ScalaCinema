@@ -6,7 +6,9 @@
 GET     /                           controllers.Application.index
 
 
-GET     /test                           controllers.Application.showMovies
+GET     /home                           controllers.Application.showMovies
+
+GET     /movieinfo/:id                  controllers.Application.movieInfo(id: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

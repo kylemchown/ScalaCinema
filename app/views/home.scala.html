@@ -6,65 +6,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <style>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/home.css")">
 
-
-
-            myCarousel {
-                margin-top: 100px;
-            }
-img{
-    margin:0%
-}
-            /* Remove the navbar's default rounded borders and increase the bottom margin */
-
-
-            /* Add a gray background color and some padding to the footer */
-            footer {
-                background-color: #f2f2f2;
-                padding: 25px;
-            }
-            .carousel-inner img {
-                margin: auto;
-            }
-
-
-
-            .abc:hover{
-                transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-                box-shadow: 0px 0px 5px 5px white;
-
-            }
-
-
-
-
-    .everything{
-        background-color: #000000;
-    }
-
-            .carousel-content {
-                position: absolute;
-                bottom: 5%;
-                left: 40%;
-                z-index: 10;
-                color: white;
-                text-shadow: 0 1px 2px rgba(0,0,0,.6);
-            }
-
-            .poster-text {
-                position: absolute;
-                bottom: 15%;
-                left: 30%;
-                z-index: 10;
-                color: white;
-                font-size: 200%;
-            }
-
-            .abc:hover + #poster-text{
-                visibility:hidden;
-            }
-    </style>
 }{
 
 <div class="everything">
@@ -100,17 +43,6 @@ img{
 
             }
 
-
-
-
-
-
-
-
-
-
-
-
         </div>
 
             <!-- Left and right controls -->
@@ -140,9 +72,14 @@ img{
 
         <div class="col-sm-4">
             <div class="panel panel-primary">
-                <div class="panel-body" onclick="window.location.href='https://en.wikipedia.org/wiki/The_Darkest_Minds'"><div class="abc"><img src=https://image.tmdb.org/t/p/w500/@response.split("},")(i).split("poster_path\":\"")(1).split("\",\"")(0).substring(1) class="img-responsive" style="width:100%" alt="Image">
-                    <div class="poster-text">Testing 123</div>
-                </div></div>
+                <div class="panel-body" onclick="window.location.href=/movieinfo/ + @response.split("},")(i).split("id\":")(1).split(",\"")(0)">
+                    <div class="abc">
+                        <img src=https://image.tmdb.org/t/p/w500/@response.split("},")(i).split("poster_path\":\"")(1).split("\",\"")(0).substring(1) class="img-responsive" style="width:100%" alt="Image">
+                        <div class="overlay">
+                            <div class="poster-text">Testing 123</div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
