@@ -1,12 +1,11 @@
 package controllers
 
 
-import models.Seat
+import models.{Seat}
 import slick.jdbc.MySQLProfile.api._
 
-import scala.concurrent.{Await, Future}
+import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
-
 import scala.language.postfixOps
 import scala.util.{Failure, Success}
 
@@ -43,10 +42,20 @@ object DatabaseConnection {
   }
 
 
-  def addSeat(row: Int, column: Char, room: Int, isTaken: Boolean): Unit = {
+  def initialiseRoom: Unit = {
     val insertSeat = Future {
 
-      val query = seatTable += (row, column, room, isTaken)
+      val alphabet = ('a' to 'z').toArray
+
+      val seats = scala.collection.mutable.ArrayBuffer[(Int, Char, Int, Boolean)]()
+
+      for(i<- 1 to 10; j<- 0 to 9) {
+        seats += ((i, alphabet(j), 3, false))
+      }
+
+      seats.foreach(println)
+
+      val query = seatTable ++= seats
 
 
       db.run(query)
@@ -57,14 +66,6 @@ object DatabaseConnection {
     }
   }
 
-  def initialiseRoom: Unit = {
-
-    val alphabet = ('a' to 'z').toArray
-
-    for(i<- 1 to 10; j<- 0 to 9) {
-      addSeat(i, alphabet(j), 3, false)
-    }
-  }
 
   def bookSeat(row: Int, column: Char) = {
     val bookFuture = Future {
@@ -81,6 +82,8 @@ object DatabaseConnection {
   }
 
   def listSeats = {
+
+
 
     db.run(seatTable.sortBy(_.row).result)
 

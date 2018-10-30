@@ -1,29 +1,18 @@
-@import views.html.helper.form
-@(seats: Seq[(Int, Char, Int, Boolean)])(implicit messages: Messages)
+
+@(seats: Seq[(Int, Char, Int, Boolean)], form: Form[SeatForm])(implicit messages: Messages)
 
     @main("Booking") {<h1></h1>}{
-        <select>
-    @for(seat <- seats) {
-        <option value =@{seat._1 + seat._2} >@{seat._1 + seat._2.toString}</option>
+        <form action="">
+
+
+            <select id = "lol">
+            @for(seat <- seats) {
+                <option value =@{(seat._1, seat._2)} >@{seat._1 + seat._2.toString}</option>
+            }
+            </select>
+            <input type="submit" value="Submit" />
+        </form>
     }
-        </select>
-        <input type = submit value = "submit" onclick = @{}>
-}
 
 
-@*@(seats: Seq[(Int, Char, Int, Boolean)])(implicit messages: Messages)*@
-
-@*@main("Booking") {<h1></h1>}{*@
-    @*<select>*@
-    @*@for(i <- 0 until seats.size) {*@
-        @*<option*@
-        @*value =@{(seats.sortBy(_._1).apply(i)._1, seats.sortBy(_._1).apply(i)._2)} >*@
-        @*@{seats.sortBy(_._1).apply(i)._1 + seats.sortBy(_._1).apply(i)._2.toString}*@
-        @*</option>*@
-    @*}*@
-    @*</select>*@
-    @*<input type = submit value = "submit" onclick = @{}>*@
-
-
-@*}*@
 

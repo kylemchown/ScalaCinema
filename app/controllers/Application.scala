@@ -1,15 +1,12 @@
 package controllers
 
-import controllers.DatabaseConnection.db
 import javax.inject.Inject
-import models.Seat
+import models.SeatForm
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
 
-import scala.collection.mutable.ArrayBuffer
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.language.postfixOps
-import scala.util.{Failure, Success}
 
 
 class Application @Inject()(val messagesApi: MessagesApi, environment: play.api.Environment) extends Controller with I18nSupport {
@@ -20,6 +17,7 @@ class Application @Inject()(val messagesApi: MessagesApi, environment: play.api.
 
   def drop = Action {
     DatabaseConnection.dropDB
+    Thread.sleep(1000)
     Ok("Success")
   }
 
@@ -30,7 +28,8 @@ class Application @Inject()(val messagesApi: MessagesApi, environment: play.api.
 
   def list() = Action.async {
 
-    DatabaseConnection.listSeats.map(result => Ok(views.html.bookingForm(result)))
+
+    DatabaseConnection.listSeats.map(result => Ok(views.html.bookingForm(result, SeatForm.createPersonForm)))
 
   }
 
