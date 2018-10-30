@@ -8,3 +8,11 @@
     width: 100%;
     height: 80%;
 }
+
+* {
+    color: white;
+}
+
+#bookNowButton {
+    color: black;
+}
