@@ -9,7 +9,7 @@ class Application extends Controller {
     Ok(views.html.index("Your new application is ready."))
   }
 
-  def movieinfo(id: String) = Action {
+  def movieDetails(id: String) = Action {
     Ok(views.html.movie(GetMovies.movieDetails(id)))
   }
 
