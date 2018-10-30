@@ -9,4 +9,7 @@ class Application extends Controller {
     Ok(views.html.index("Your new application is ready."))
   }
 
+  def map = Action {
+    Ok(views.html.map("Your new application is ready."))
+  }
 }
