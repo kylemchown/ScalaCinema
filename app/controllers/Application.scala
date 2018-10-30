@@ -3,11 +3,12 @@ package controllers
 import play.api._
 import play.api.mvc._
 
+
 import javax.inject.Inject
 import scala.concurrent.Future
 import scala.concurrent.duration._
 
-import play.api.mvc._
+
 import play.api.libs.ws._
 import play.api.http.HttpEntity
 
@@ -18,7 +19,6 @@ import akka.util.ByteString
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.ExecutionContext.Implicits.global
-//import spray.json._
 import play.api.libs.json._
 
 class Application @Inject() (ws: WSClient) extends Controller {
@@ -39,8 +39,3 @@ class Application @Inject() (ws: WSClient) extends Controller {
       Ok(views.html.test("Home Page")(id)(response.body))
     }
   }
-
-
-
-
-}
