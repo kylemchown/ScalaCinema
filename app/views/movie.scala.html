@@ -10,6 +10,7 @@
         <script>
                 window.onload = function () {
                     let json = JSON.parse(@Html(Json.stringify(Json.toJson(moviedata))));
+                    if (json === "No Movie") window.location.replace('@controllers.routes.Application.index')
                     $("#back").attr("src", "https://image.tmdb.org/t/p/w500/" + json[6]);
                     $("#back").css("opacity", "0.4");
                     $("#title").html(json[0]);
