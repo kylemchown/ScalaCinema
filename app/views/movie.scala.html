@@ -1,22 +1,24 @@
 @(moviedata: String)
 @import play.api.libs.json.Json
-<script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
 <html>
     <head>
         <title>Movie Information</title>
+        <link rel="stylesheet" type="text/css" href='@routes.Assets.at("stylesheets/styles.css")'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script>
                 window.onload = function () {
-                    let org = @Html(Json.stringify(Json.toJson(moviedata)));
-                    let json = JSON.parse(org);
-                    console.log(json);
+                    let json = JSON.parse(@Html(Json.stringify(Json.toJson(moviedata))));
+                    $("#back").attr("src", "https://image.tmdb.org/t/p/w500/" + json[6]);
+                    $("#back").css("opacity", "0.4");
                     $("#title").html(json[0]);
                     $("#overview").html(json[1]);
                     $("#poster").attr("src", "https://image.tmdb.org/t/p/w500/" + json[2]);
-                    $("#release").html(json[3]);
-                    $("#runtime").html(json[4] + " mins");
+                    $("#release").html("Release date: " + json[3]);
+                    $("#runtime").html("Runtime: " + json[4] + " mins");
                     $("#trailer").attr("src", "https://www.youtube.com/embed/" + json[5]);
-                    $("#back").attr("src", "https://image.tmdb.org/t/p/w500/" + json[6]);
-                    let allGenre = "";
+                    let allGenre = "Genre: ";
                     for (let i = 7; i < json.length; i++) {
                         if (i == json.length - 1) {
                             allGenre += json[i];
@@ -29,18 +31,32 @@
         </script>
     </head>
     <body>
-        <h2 id="title"></h2>
-        <h4 id="release"></h4>
-        <p id="runtime"></p>
-        <p id="genre"></p>
-        <hr>
-        <iframe id="trailer" width="420" height="315"></iframe>
-        <p id="overview"></p>
-        <img id="poster" height="300" width="200">
-
-        <img id="back" height="500" width="500">
+        <img id="back" height="auto" width="100%">
+        <div id="movieMainDiv" class="container-fluid">
+            <div class="row">
+                <div id="trailerDiv" class="col-lg-8">
+                    <iframe id="trailer"></iframe>
+                </div>
+                <div id="moveDetails" class="col-lg-4">
+                    <h2 id="title"></h2>
+                    <img id="poster" height="180" width="150">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h4 id="release"></h4>
+                        </div>
+                        <div class="col-sm-6">
+                            <h4 id="runtime"></h4>
+                        </div>
+                    </div>
+                    <h4 id="genre"></h4>
+                    <hr>
+                    <p id="overview"></p>
+                    <br>
+                    <br>
+                    <input type="submit" onclick="location.href = '@controllers.routes.Application.index';"
+                    value="Book Now"/>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
-
-
-
