@@ -1,6 +1,6 @@
 package controllers
 
-import play.api._
+import models.GetMovies
 import play.api.mvc._
 
 
@@ -38,5 +38,9 @@ class Application @Inject() (ws: WSClient) extends Controller {
     ws.url("https://api.themoviedb.org/3/movie/now_playing?api_key=1c51d67c43ed71cbaa90f4a967f68650&language=en-US&page=1").get().map { response =>
       Ok(views.html.test("Home Page")(id)(response.body))
     }
+  }
+
+   def movieDetails(id: String) = Action {
+    Ok(views.html.movie(GetMovies.movieDetails(id)))
   }
 }
