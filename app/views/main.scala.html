@@ -8,6 +8,7 @@
         @head
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
         <link rel="stylesheet" href="@routes.Assets.at("stylesheets/footer.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/header.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
         <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
@@ -16,6 +17,16 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
+        <header class="header">
+            <div class="NavBar">
+                <ul id="iteamList">
+                    <li><a>"Logo"</a></li>
+                    <li><a>Whats On</a></li>
+                    <li><a>Location</a></li>
+                    <li><a>Upcoming</a></li>
+                </ul>
+            </div>
+        </header>
         @content
     <footer>
         <div class="ContactBar">
@@ -25,7 +36,7 @@
                         <h1>Contact Us</h1>
                         <p>
                             Tel : 07709987<br/>
-                            emal : QaCinema&#64;qacinema.com<br/>
+                            Email : QaCinema&#64;qacinema.com<br/>
                                 <a>FAQ</a>
                         </p>
                     </div>
