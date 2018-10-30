@@ -27,12 +27,36 @@
                     var manch = {lat: 53.480759, lng: -2.242631};
                     map = new google.maps.Map(
                             document.getElementById('map'), {center: manch, zoom: 12})
-                    var marker = new google.maps.Marker({position: manch, map: map})
-                    ;
+                    //var marker = new google.maps.Marker({position: manch, map: map})
+                    var request = {
+                        location: manch,
+                        radius: '500',
+                        query: 'restaurant'
+                    };
+                    service = new google.maps.places.PlacesService(map);
+                    service.nearbySearch(request, callback);
+
+
+                }
+                function callback(results, status) {
+                    if (status == google.maps.places.PlacesServiceStatus.OK) {
+                        for (var i = 0; i < results.length; i++) {
+                            var place = results[i];
+                            createMarker(results[i]);
+                        }
+                    }
                 }
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXZtiT0cEoT6HpO6ycpQUDQcr3hs5JnbY&callback=initMap"
         async defer></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXZtiT0cEoT6HpO6ycpQUDQcr3hs5JnbY&libraries=places"
+        ></script>
+
+
+
+
+        <input name="Post Code" type="text">
+        <button type="button" onclick="">Click</button>
     </body>
 
 }
