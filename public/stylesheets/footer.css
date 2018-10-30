@@ -22,13 +22,13 @@
 }
 .ContactItem a{
     color: #FFFFFF;
-    transition: text-shadow 1s, color 1s;
+    transition: text-shadow 0.5s, color 0.5s;
 }
 .ContactItem a:hover{
     cursor: pointer;
     color: #179422;
     text-decoration: none;
-    text-shadow: 0px 0px 3px #179422;
+    text-shadow: 0px 0px 12px #179422;
 }
 .vl{
     border: 0px;
