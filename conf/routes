@@ -3,10 +3,8 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET     /                           controllers.Application.showMovies
 
-
-GET     /home                           controllers.Application.showMovies
 
 GET     /movieinfo/:id                  controllers.Application.movieInfo(id: String)
 

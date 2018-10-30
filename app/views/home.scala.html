@@ -14,9 +14,14 @@
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
         <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
+            @for(i <- 0 to response.split("},").length -3){
+                @if(i == 0){
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                }
+                @if(i>0){
+                    <li data-target="#myCarousel" data-slide-to=@i></li>
+                }
+            }
         </ol>
 
             <!-- Wrapper for slides -->
@@ -27,7 +32,6 @@
                 @if(i==0 && response.split("},")(i).split("backdrop_path\":")(1).split(",\"")(0).substring(1).length > 5) {
                     <div class="item active">
                         <div class="carousel-content">
-                        <h3>asgdfhiah</h3>
                         </div>
                         <img src=https://image.tmdb.org/t/p/w500/@response.split("},")(i).split("backdrop_path\":")(1).split(",\"")(0).substring(2).dropRight(1) alt="Chicago">
                     </div>
@@ -35,7 +39,6 @@
                 @if(i!=0 && response.split("},")(i).split("backdrop_path\":")(1).split(",\"")(0).substring(1).length > 5){
                     <div class="item">
                         <div class="carousel-content">
-                            <h3>asgdfhiah</h3>
                         </div>
                         <img src=https://image.tmdb.org/t/p/w500/@response.split("},")(i).split("backdrop_path\":")(1).split(",\"")(0).substring(2).dropRight(1) alt="Chicago">
                     </div>
@@ -100,13 +103,7 @@
 
 
 
-    <footer class="container-fluid text-center">
-        <p>Online Store Copyright</p>
-        <form class="form-inline">Get deals:
-            <input type="email" class="form-control" size="50" placeholder="Email Address">
-            <button type="button" class="btn btn-danger">Sign Up</button>
-        </form>
-    </footer>
+
 
 </div>
 }
