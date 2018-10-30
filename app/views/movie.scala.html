@@ -10,15 +10,19 @@
         <script>
                 window.onload = function () {
                     let json = JSON.parse(@Html(Json.stringify(Json.toJson(moviedata))));
-                    if (json === "No Movie") window.location.replace('@controllers.routes.Application.index')
-                    $("#back").attr("src", "https://image.tmdb.org/t/p/w500/" + json[6]);
-                    $("#back").css("opacity", "0.4");
+                    if (json === "No Movie") window.location.replace('@controllers.routes.Application.index');
+                    if (json[6] === null) $("body").css('background-color', '#999999');
+                    else {
+                        $("#back").attr("src", "https://image.tmdb.org/t/p/w500/" + json[6]);
+                        $("#back").css("opacity", "0.4");
+                    }
                     $("#title").html(json[0]);
                     $("#overview").html(json[1]);
                     $("#poster").attr("src", "https://image.tmdb.org/t/p/w500/" + json[2]);
                     $("#release").html("Release date: " + json[3]);
-                    $("#runtime").html("Runtime: " + json[4] + " mins");
-                    $("#trailer").attr("src", "https://www.youtube.com/embed/" + json[5]);
+                    if (json[4] !== null) $("#runtime").html("Runtime: " + json[4] + " mins");
+                    if (json[5] === null) $("#trailerDiv").html("<h3> No trailer available</h3>");
+                    else $("#trailer").attr("src", "https://www.youtube.com/embed/" + json[5]);
                     let allGenre = "Genre: ";
                     for (let i = 7; i < json.length; i++) {
                         if (i == json.length - 1) {
@@ -35,7 +39,7 @@
         <img id="back" height="auto" width="100%">
         <div id="movieMainDiv" class="container-fluid">
             <div class="row">
-                <div id="trailerDiv" class="col-lg-8">
+                <div id="trailerDiv" class="col-lg-8 text-center">
                     <iframe id="trailer"></iframe>
                 </div>
                 <div id="moveDetails" class="col-lg-4">
