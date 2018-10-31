@@ -1,7 +1,6 @@
 @(message: String)
 
 @main("Welcome to Play") {
-    <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Places Search Box</title>
@@ -9,8 +8,7 @@
             /* Always set the map height explicitly to define the size of the div
              * element that contains the map. */
             #map {
-                height: 50%;
-                width: 75%;
+                height: 100%;
             }
             /* Optional: Makes the sample page fill the window. */
             html, body {
@@ -88,90 +86,279 @@
             #target {
                 width: 345px;
             }
+
+            #right-panel {
+                font-family: 'Roboto','sans-serif';
+                line-height: 30px;
+                padding-left: 10px;
+            }
+
+            #right-panel select, #right-panel input {
+                font-size: 15px;
+            }
+
+            #right-panel select {
+                width: 100%;
+            }
+
+            #right-panel i {
+                font-size: 12px;
+            }
+            #right-panel {
+                font-family: Arial, Helvetica, sans-serif;
+                position: absolute;
+                right: 5px;
+                top: 60%;
+                margin-top: -195px;
+                height: 330px;
+                width: 200px;
+                padding: 5px;
+                z-index: 5;
+                border: 1px solid #999;
+                background: #fff;
+            }
+            h2 {
+                font-size: 22px;
+                margin: 0 0 5px 0;
+            }
+            ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+                height: 271px;
+                width: 200px;
+                overflow-y: scroll;
+            }
+            li {
+                background-color: #f1f1f1;
+                padding: 10px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+            li:nth-child(odd) {
+                background-color: #fcfcfc;
+            }
+            #more {
+                width: 100%;
+                margin: 5px 0 0 0;
+            }
     </style>
+    <script>
+            var service = new google.maps.places.PlacesService(map);
+            var getNextPage = null;
+            var moreButton = document.getElementById('more');
+            moreButton.onclick = function() {
+                moreButton.disabled = true;
+                if (getNextPage) getNextPage();
+            };
+
+
+    </script>
 }{
-    <body>
-        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-        <div id="map"></div>
-        <script>
-                // This example adds a search box to a map, using the Google Place Autocomplete
-                // feature. People can enter geographical searches. The search box will return a
-                // pick list containing a mix of places and predicted search terms.
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map"></div>
+    <script>
+            // This example adds a search box to a map, using the Google Place Autocomplete
+            // feature. People can enter geographical searches. The search box will return a
+            // pick list containing a mix of places and predicted search terms.
 
-                // This example requires the Places library. Include the libraries=places
-                // parameter when you first load the API. For example:
-                // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+            // This example requires the Places library. Include the libraries=places
+            // parameter when you first load the API. For example:
+            // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-                function initAutocomplete() {
-                    var map = new google.maps.Map(document.getElementById('map'), {
-                        center: {lat: 53.480759, lng: -2.242631},
-                        zoom: 13,
-                        mapTypeId: 'roadmap'
-                    });
+            function initAutocomplete() {
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: 52.355518, lng: -1.174320},
+                    zoom: 7,
+                    mapTypeId: 'roadmap'
+                });
 
-                    // Create the search box and link it to the UI element.
-                    var input = document.getElementById('pac-input');
-                    var searchBox = new google.maps.places.SearchBox(input);
-                    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+                // Create the search box and link it to the UI element.
+                var input = document.getElementById('pac-input');
+                var searchBox = new google.maps.places.SearchBox(input);
+                map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-                    // Bias the SearchBox results towards current map's viewport.
-                    map.addListener('bounds_changed', function() {
-                        searchBox.setBounds(map.getBounds());
-                    });
+                // Bias the SearchBox results towards current map's viewport.
+                map.addListener('bounds_changed', function() {
+                    searchBox.setBounds(map.getBounds());
+                });
 
-                    var markers = [];
-                    // Listen for the event fired when the user selects a prediction and retrieve
-                    // more details for that place.
-                    searchBox.addListener('places_changed', function() {
-                        var places = searchBox.getPlaces();
 
-                        if (places.length == 0) {
+
+                var infowindows = [
+                    new google.maps.InfoWindow({
+                        content: '<div id="content">'+
+                                '<div id="siteNotice">'+
+                                '</div>'+
+                                '<h1 id="firstHeading" class="firstHeading">??? Cinemas - Manchester</h1>'+
+                                '<div id="bodyContent">'+
+                                '<p>123 Fake Street</p>'+
+                                '<p>Manchester</p>'+
+                                '<p>M1 7HA</p>'+
+                                '</div>'+
+                                '</div>'
+                    }),
+                    new google.maps.InfoWindow({
+                        content: '<div id="content">'+
+                                '<div id="siteNotice">'+
+                                '</div>'+
+                                '<h1 id="firstHeading" class="firstHeading">??? Cinemas - Leeds</h1>'+
+                                '<div id="bodyContent">'+
+                                '<p>48 Fraud Lane</p>'+
+                                '<p>Leeds</p>'+
+                                '<p>LS1 3DS</p>'+
+                                '</div>'+
+                                '</div>'
+                    }),
+
+                    new google.maps.InfoWindow({
+                        content: '<div id="content">' +
+                                '<div id="siteNotice">' +
+                                '</div>' +
+                                '<h1 id="firstHeading" class="firstHeading">??? Cinemas - London</h1>' +
+                                '<div id="bodyContent">' +
+                                '<p>3 Street Drive</p>' +
+                                '<p>London</p>' +
+                                '<p>WC2N 3AS</p>' +
+                                '</div>' +
+                                '</div>'
+                    }),
+
+                    new google.maps.InfoWindow({
+                        content: '<div id="content">' +
+                                '<div id="siteNotice">' +
+                                '</div>' +
+                                '<h1 id="firstHeading" class="firstHeading">??? Cinemas - Cardiff</h1>' +
+                                '<div id="bodyContent">' +
+                                '<p>10 Senghennydd Road</p>' +
+                                '<p>Cardiff</p>' +
+                                '<p>CF24 4AG</p>' +
+                                '</div>' +
+                                '</div>'
+                    }),
+
+                    new google.maps.InfoWindow({
+                        content: '<div id="content">' +
+                                '<div id="siteNotice">' +
+                                '</div>' +
+                                '<h1 id="firstHeading" class="firstHeading">??? Cinemas - Leicester</h1>' +
+                                '<div id="bodyContent">' +
+                                '<p>999 Whatever Lane</p>' +
+                                '<p>Leicester</p>' +
+                                '<p>LE1 7GC</p>' +
+                                '</div>' +
+                                '</div>'
+                    })
+
+                ]
+
+                var markers = [
+                    new google.maps.Marker({
+                        position: {lat: 53.480759, lng: -2.242620},
+                        map: map,
+                        title: 'Hello World!'
+                    }),
+
+                    new google.maps.Marker({
+                        position: {lat: 53.799690, lng: -1.549100},
+                        map: map,
+                        title: 'Hello World!'
+                    }),
+
+                    new google.maps.Marker({
+                        position: {lat: 51.507351, lng: -0.127758},
+                        map: map,
+                        title: 'Hello World!'
+                    }),
+
+                    new google.maps.Marker({
+                        position: {lat: 51.481583, lng: -3.179090},
+                        map: map,
+                        title: 'Hello World!'
+                    }),
+
+                    new google.maps.Marker({
+                        position: {lat: 52.636879, lng: -1.139759},
+                        map: map,
+                        title: 'Hello World!'
+                    })
+
+                ]
+
+
+                markers.forEach(marker =>
+                        marker.addListener('click', function() {
+                            infowindows[markers.indexOf(marker)].open(map, marker);
+                        })
+                )
+
+
+                // Listen for the event fired when the user selects a prediction and retrieve
+                // more details for that place.
+
+
+                searchBox.addListener('places_changed', function() {
+
+
+
+
+                    var places = searchBox.getPlaces('store');
+
+                    if (places.length == 0) {
+                        return;
+                    }
+
+                    // Clear out the old markers.
+                    // markers.forEach(function(marker) {
+                    //     marker.setMap(null);
+                    // });
+
+
+                    // For each place, get the icon, name and location.
+                    var bounds = new google.maps.LatLngBounds();
+                    places.forEach(function(place) {
+                        if (!place.geometry) {
+                            console.log("Returned place contains no geometry");
                             return;
                         }
+                        var icon = {
+                            url: place.icon,
+                            size: new google.maps.Size(71, 71),
+                            origin: new google.maps.Point(0, 0),
+                            anchor: new google.maps.Point(17, 34),
+                            scaledSize: new google.maps.Size(25, 25)
+                        };
 
-                        // Clear out the old markers.
-                        markers.forEach(function(marker) {
-                            marker.setMap(null);
-                        });
-                        markers = [];
+                        // Create a marker for each place.
+                        markers.push(new google.maps.Marker({
+                            map: map,
+                            icon: icon,
+                            title: place.name,
+                            position: place.geometry.location
+                        }));
 
-                        // For each place, get the icon, name and location.
-                        var bounds = new google.maps.LatLngBounds();
-                        places.forEach(function(place) {
-                            if (!place.geometry) {
-                                console.log("Returned place contains no geometry");
-                                return;
-                            }
-                            var icon = {
-                                url: place.icon,
-                                size: new google.maps.Size(71, 71),
-                                origin: new google.maps.Point(0, 0),
-                                anchor: new google.maps.Point(17, 34),
-                                scaledSize: new google.maps.Size(25, 25)
-                            };
-
-                            // Create a marker for each place.
-                            markers.push(new google.maps.Marker({
-                                map: map,
-                                icon: icon,
-                                title: place.name,
-                                position: place.geometry.location
-                            }));
-
-                            if (place.geometry.viewport) {
-                                // Only geocodes have viewport.
-                                bounds.union(place.geometry.viewport);
-                            } else {
-                                bounds.extend(place.geometry.location);
-                            }
-                        });
-                        map.fitBounds(bounds);
+                        if (place.geometry.viewport) {
+                            // Only geocodes have viewport.
+                            bounds.union(place.geometry.viewport);
+                        } else {
+                            bounds.extend(place.geometry.location);
+                        }
                     });
-                }
+                    map.fitBounds(bounds);
+                });
+            }
 
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXZtiT0cEoT6HpO6ycpQUDQcr3hs5JnbY&libraries=places&callback=initAutocomplete"
-        async defer></script>
-    </body>
+    </script>
 
+    <div id="right-panel">
+        <h2>Results</h2>
+        <ul id="places"></ul>
+        <button id="more">More results</button>
+    </div>
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXZtiT0cEoT6HpO6ycpQUDQcr3hs5JnbY&libraries=places&callback=initAutocomplete"
+    async defer></script>
 }
+
