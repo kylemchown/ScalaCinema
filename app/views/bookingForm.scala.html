@@ -2,17 +2,23 @@
 @(seats: Seq[(Int, Char, Int, Boolean)], form: Form[SeatForm])(implicit messages: Messages)
 
     @main("Booking") {<h1></h1>}{
-        <form action="">
+        @helper.form(controllers.routes.Application.bookSeat) {
+            @helper.select(
+                form("seat"),
+                options = seats.map(seat => (seat._1.toString + seat._2.toString) -> (seat._1.toString + seat._2.toString))
+            )
+            <button type="submit">Add Person</button>
 
+        }
 
-            <select id = "lol">
-            @for(seat <- seats) {
-                <option value =@{(seat._1, seat._2)} >@{seat._1 + seat._2.toString}</option>
-            }
-            </select>
-            <input type="submit" value="Submit" />
-        </form>
-    }
+    @*<select id = "lol">*@
+    @*@for(seat <- seats) {*@
+        @*<option value =@{(seat._1, seat._2)} >@{seat._1 + seat._2.toString}</option>*@
+    @*}*@
+    @*</select>*@
+    @*<input type="submit" value="Submit" onclick = "" />*@
+
+        }
 
 
 

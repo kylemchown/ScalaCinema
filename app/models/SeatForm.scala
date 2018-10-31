@@ -6,7 +6,7 @@ import play.api.data.Forms._
 case class SeatForm(seat: String)
 
   object SeatForm {
-    val createPersonForm = Form(
+    val createSeatForm = Form(
       mapping(
         "seat" -> nonEmptyText
       )(SeatForm.apply)(SeatForm.unapply)

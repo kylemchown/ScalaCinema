@@ -83,9 +83,8 @@ object DatabaseConnection {
 
   def listSeats = {
 
+    db.run(seatTable.filter(a => !a.isTaken).result)
 
-
-    db.run(seatTable.sortBy(_.row).result)
 
   }
 
