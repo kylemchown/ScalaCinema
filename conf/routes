@@ -7,8 +7,6 @@
 
 GET         /                    controllers.Application.showMovies
 
-GET        /movieinfo/:id        controllers.Application.movieDetails(id:String)
-
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file         controllers.Assets.at(path="/public", file)
 

@@ -1,6 +1,8 @@
 #back{
     position: absolute;
     top: 0;
+    height: 100%;
+    width: 100%;
     z-index: -100;
 }
 
@@ -15,4 +17,9 @@
 
 #bookNowButton {
     color: black;
+}
+
+#movieMainDiv{
+    position: relative;
+    top: 8%;
 }
