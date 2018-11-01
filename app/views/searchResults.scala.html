@@ -13,7 +13,6 @@
 
             </head>
             <body>
-                <div>@response</div>
             @for(i <- 0 to response.split("},").length - 2) {
                 <div>
                 <a onclick="window.location.href=/movieinfo/ + @response.split("},")(i).split("id\":")(1).split(",\"")(0)">
