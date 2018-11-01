@@ -5,7 +5,6 @@
 <html>
     <head>
         <title>@title</title>
-        @head
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
         <link rel="stylesheet" href="@routes.Assets.at("stylesheets/footer.css")">
         <link rel="stylesheet" href="@routes.Assets.at("stylesheets/header.css")">
@@ -15,58 +14,65 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        @head
     </head>
     <body>
         <header class="header">
-            <div class="NavBar">
-                <ul id="iteamList">
-                    <li><a>"Logo"</a></li>
-                    <li><a>Whats On</a></li>
-                    <li><a>Location</a></li>
-                    <li><a>Upcoming</a></li>
-                </ul>
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="NavBar">
+                    <ul id="iteamList">
+                        <li onclick="location.href = '@controllers.routes.Application.showMovies';"><a>"Logo"</a></li>
+                        <li onclick="location.href = '@controllers.routes.Application.showMovies';"><a>Whats On</a></li>
+                        <li><a>Location</a></li>
+                        <li><a>Upcoming</a></li>
+                    </ul>
+                </div>
             </div>
         </header>
         @content
-    <footer>
-        <div class="ContactBar">
-            <ul id="ContactInfoList">
-                <li class="li1">
-                    <div class="ContactItem">
-                        <h1>Contact Us</h1>
-                        <p>
-                            Tel : 07709987<br/>
-                            Email : QaCinema&#64;qacinema.com<br/>
-                                <a>FAQ</a>
-                        </p>
-                    </div>
-                </li>
-                <li><div class="vl"></div></li>
-                <li class="li1">
-                    <div class="ContactItem">
-                        <h1>Social</h1>
-                        <p>
-                            <a><i class="fa fa-facebook"></i> Facebook</a><br/>
-                            <a><i class="fa fa-twitter"></i> Twitter</a><br/>
-                            <a><i class="fa fa-instagram"></i> Instagram</a><br/>
-                        </p>
-                    </div>
-                </li>
-                <li><div class="vl"></div></li>
-                <li class="li1">
-                    <div class="ContactItem">
-                        <address>
-                            <h1>Address</h1>
+        <footer>
+            <br>
+            <div class="ContactBar">
+                <ul id="ContactInfoList">
+                    <li class="li1">
+                        <div class="ContactItem">
+                            <h1>Contact Us</h1>
                             <p>
-                                34/3 Bernard Street<br/>
-                                Edinburgh<br/>
-                                EH6 6PR
+                                Tel : 07709987<br/>
+                                Email : QaCinema&#64;qacinema.com<br/>
+                                <a>FAQ</a>
                             </p>
-                        </address>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </footer>
+                        </div>
+                    </li>
+                    <li><div class="vl"></div></li>
+                    <li class="li1">
+                        <div class="ContactItem">
+                            <h1>Social</h1>
+                            <p>
+                                <a><i class="fa fa-facebook"></i> Facebook</a>
+                                <br/>
+                                <a><i class="fa fa-twitter"></i> Twitter</a>
+                                <br/>
+                                <a><i class="fa fa-instagram"></i> Instagram</a>
+                                <br/>
+                            </p>
+                        </div>
+                    </li>
+                    <li><div class="vl"></div></li>
+                    <li class="li1">
+                        <div class="ContactItem">
+                            <address>
+                                <h1>Address</h1>
+                                <p>
+                                    34/3 Bernard Street<br/>
+                                    Edinburgh<br/>
+                                    EH6 6PR
+                                </p>
+                            </address>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </footer>
     </body>
 </html>
