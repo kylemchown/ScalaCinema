@@ -9,7 +9,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.language.postfixOps
 import scala.util.{Failure, Success}
 
-object DatabaseConnection {
+object DatabaseConnection extends App {
 
   val db = Database.forConfig("mysqlDB")
 
@@ -84,7 +84,6 @@ object DatabaseConnection {
   def listSeats = {
 
     db.run(seatTable.filter(a => !a.isTaken).result)
-
 
   }
 
