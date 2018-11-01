@@ -10,7 +10,7 @@
         <script>
                 window.onload = function () {
                     let json = JSON.parse(@Html(Json.stringify(Json.toJson(moviedata))));
-                    if (json === "No Movie") window.location.replace('@controllers.routes.Application.index');
+                    if (json === "No Movie") window.location.replace('@controllers.routes.Application.showMovies()');
                     if (json[6] === null) $("body").css('background-color', 'black');
                     else {
                         $("#back").attr("src", "https://image.tmdb.org/t/p/w500/" + json[6]);
@@ -57,7 +57,7 @@
                     <p id="overview"></p>
                     <br>
                     <br>
-                    <input id="bookNowButton" type="submit" onclick="location.href = '@controllers.routes.Application.index';"
+                    <input id="bookNowButton" type="submit" onclick="location.href = '@controllers.routes.Application.showMovies()';"
                     value="Book Now"/>
                 </div>
             </div>
