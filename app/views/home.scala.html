@@ -5,16 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/home.css")">
     <script>
+        //Onload if screen width is below certain size, hide adverts
+        window.onload = function(){
+            if (window.innerWidth < screen.width-100){
+                $('#advertToRight').hide();
+                $('#advertLeft').hide();
+            }
+        };
         //If window size below certain point, hide adverts
-            $(window).resize(function() {
-                if (($(this).width() < screen.width-80) || (window.innerWidth < screen.width-100)) {
-                    $('#advertToRight').hide();
-                    $('#advertLeft').hide();
-                } else {
-                    $('#advertToRight').show();
-                    $('#advertLeft').show();
-                }
-            });
+        $(window).resize(function() {
+            if (($(this).width() < screen.width-80)) {
+                $('#advertToRight').hide();
+                $('#advertLeft').hide();
+            } else {
+                $('#advertToRight').show();
+                $('#advertLeft').show();
+            }
+        });
     </script>
 } {
     <div id="advertToRight" class="row" onclick="window.location.href = /movieinfo/ + @response.split("},")(1).split("id\":")(1).split(",\"")(0)">
