@@ -1,7 +1,8 @@
 package controllers
 
 
-import models.{Seat}
+import models.Seat
+import play.mvc.Http.RequestBody
 import slick.jdbc.MySQLProfile.api._
 
 import scala.concurrent.Future
@@ -9,7 +10,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.language.postfixOps
 import scala.util.{Failure, Success}
 
-object DatabaseConnection extends App {
+object DatabaseConnection {
 
   val db = Database.forConfig("mysqlDB")
 
@@ -49,7 +50,7 @@ object DatabaseConnection extends App {
 
       val seats = scala.collection.mutable.ArrayBuffer[(Int, Char, Int, Boolean)]()
 
-      for(i<- 1 to 10; j<- 0 to 9) {
+      for(i<- 1 to 5; j<- 0 to 6) {
         seats += ((i, alphabet(j), 3, false))
       }
 
@@ -75,7 +76,7 @@ object DatabaseConnection extends App {
       db.run(updateAction)
     }
     bookFuture.onComplete {
-      case Success(_) =>  db.close()
+      case Success(_) =>
         println("Booking successful")
       case Failure(error) => println("Booking failed due to: " + error.getMessage)
     }
@@ -83,7 +84,7 @@ object DatabaseConnection extends App {
 
   def listSeats = {
 
-    db.run(seatTable.filter(a => !a.isTaken).result)
+    db.run(seatTable.result)
 
   }
 

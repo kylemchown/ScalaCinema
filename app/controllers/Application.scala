@@ -1,16 +1,24 @@
 package controllers
 
+import controllers.DatabaseConnection.{db, seatTable}
 import javax.inject.Inject
-import models.SeatForm
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
-
+import slick.lifted.TableQuery
+import models.Seat
+import slick.jdbc.MySQLProfile.api._
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.language.postfixOps
+import scala.concurrent.Future
+import scala.language.postfixOps
+import scala.language.postfixOps
+import scala.util.{Failure, Success}
 
 
 class Application @Inject()(val messagesApi: MessagesApi, environment: play.api.Environment) extends Controller with I18nSupport {
+  val seatTable = TableQuery[Seat]
+  val db = Database.forConfig("mysqlDB")
 
   def index = Action {
     Ok(views.html.index("Your new application is ready."))
@@ -18,31 +26,38 @@ class Application @Inject()(val messagesApi: MessagesApi, environment: play.api.
 
   def drop = Action {
     DatabaseConnection.dropDB
-    Thread.sleep(1000)
     Ok("Success")
   }
 
+  def book(seat: String) = Action {
+    DatabaseConnection.bookSeat(seat.substring(0, seat.length -1).toInt, seat.charAt(seat.length-1))
+    Ok("booked")
+  }
 
-  def list  = Action.async { implicit request =>
+  def list  = Action { implicit request =>
 
-    DatabaseConnection.listSeats.map(result => Ok(views.html.bookingForm(result, SeatForm.createSeatForm)))
-
+    Ok(views.html.bookingForm("hi"))
 
   }
 
 
-  def bookSeat = Action { implicit request =>
 
-    val formValidationResult = SeatForm.createSeatForm.bindFromRequest
-    println(formValidationResult)
 
-    formValidationResult.fold({ formWithErrors =>
-      BadRequest(views.html.bookingForm(Seq((0,'z',5,false)),formWithErrors))
-    }, { seat =>
-
-      DatabaseConnection.bookSeat(seat.seat.substring(0, seat.seat.length -1).toInt, seat.seat.charAt(seat.seat.length-1))
-      Redirect(routes.Application.list())
-    })
+  def lists = Action.async { implicit request =>
+    val resultingUsers: Future[Seq[(Int, Char, Int, Boolean)]] = db.run(seatTable.result)
+    resultingUsers.map(users => Ok(users.
+      toArray
+      .map { element =>
+        if (!element._4) {
+          element._1.toString + element._2.toString
+        }
+        else {
+          element._1.toString + element._2.toString + "z"
+        }
+      }
+      .mkString(",")))
   }
+
+
 
 }

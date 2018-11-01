@@ -1,15 +1,12 @@
 
-@(seats: Seq[(Int, Char, Int, Boolean)], form: Form[SeatForm])(implicit messages: Messages)
+@(message: String)(implicit messages: Messages)
 
     @main("Booking") {<h1></h1>}{
-        @helper.form(controllers.routes.Application.bookSeat) {
-            @helper.select(
-                form("seat"),
-                options = seats.map(seat => (seat._1.toString + seat._2.toString) -> (seat._1.toString + seat._2.toString))
-            )
-            <button type="submit">Add Person</button>
+    <center><h1>Booking</h1></center>
+    <br><br>
 
-        }
+        <div id = "seats">
+        </div>
 
 
     }
