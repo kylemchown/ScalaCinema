@@ -12,7 +12,7 @@ class Application @Inject() (ws: WSClient) extends Controller {
 
   def showMovies = Action.async {
     ws.url("https://api.themoviedb.org/3/movie/now_playing?api_key=1c51d67c43ed71cbaa90f4a967f68650&language=en-US&page=1").get().map { response =>
-      Ok(views.html.home("Home Page")(response.body)(views.html.footer()))
+      Ok(views.html.home("Home Page")(response.body))
     }
   }
 
@@ -23,7 +23,6 @@ class Application @Inject() (ws: WSClient) extends Controller {
   }
 
    def movieDetails(id: String) = Action {
-    Ok(views.html.movie(GetMovies.movieDetails(id))(views.html.footer())
-    (views.html.headImports())(views.html.navigation()))
+    Ok(views.html.movie(GetMovies.movieDetails(id)))
   }
 }

@@ -21,5 +21,19 @@
 
 #movieMainDiv{
     position: relative;
-    top: 8%;
+    top: 10%;
+    height: 80%;
+    width: 100%;
+}
+
+#trailerDiv{
+    position: absolute;
+    height: 120%;
+    width: 60%;
+    top: 12%
+}
+
+#moveDetails{
+    position: relative;
+    right: -60%;
 }

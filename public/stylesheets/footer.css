@@ -1,4 +1,6 @@
 .ContactBar{
+    position: relative;
+    margin-top: -5px;
     width: 100%;
     background-color: #000000;
 }

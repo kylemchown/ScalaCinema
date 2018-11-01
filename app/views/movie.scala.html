@@ -1,73 +1,71 @@
-@(moviedata: String)(footer: Html)(hfImports: Html)(navBar: Html)
+@(moviedata: String)
 @import play.api.libs.json.Json
-<html>
-    <head>
-        <title>Movie Information</title>
-        @hfImports
-        <link rel="stylesheet" type="text/css" href='@routes.Assets.at("stylesheets/styles.css")'>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script>
-                window.onload = function () {
-                    let json = JSON.parse(@Html(Json.stringify(Json.toJson(moviedata))));
-                    if (json === "No Movie") window.location.replace('@controllers.routes.Application.showMovies');
-                    if (json[6] === null) $("body").css('background-color', 'black');
-                    else {
-                        $("#back").attr("src", "https://image.tmdb.org/t/p/w500/" + json[6]);
-                    }
-                    $("#title").html(json[0]);
-                    $("#overview").html(json[1]);
-                    $("#poster").attr("src", "https://image.tmdb.org/t/p/w500/" + json[2]);
-                    $("#release").html("Release date: " + json[3]);
-                    if (json[4] !== null) $("#runtime").html("Runtime: " + json[4] + " mins");
-                    if (json[5] === null) $("#trailerDiv").html("<h3> No trailer available</h3>");
-                    else $("#trailer").attr("src", "https://www.youtube.com/embed/" + json[5]);
-                    let allGenre = "Genre: ";
-                    for (let i = 7; i < json.length; i++) {
-                        if (i == json.length - 1) {
-                            allGenre += json[i];
-                        } else {
-                            allGenre += json[i] + ", ";
-                        }
-                    }
-                    $("#genre").html(allGenre);
+@main("Movie Details") {
+    <link rel="stylesheet" type="text/css" href='@routes.Assets.at("stylesheets/styles.css")'>
+    <script>
+            window.onload = function () {
+                let json = JSON.parse(@Html(Json.stringify(Json.toJson(moviedata))));
+                if (json === "No Movie") window.location.replace('@controllers.routes.Application.showMovies()');
+                if (json[6] === null) $("body").css('background-color', 'black');
+                else {
+                    $("#back").attr("src", "https://image.tmdb.org/t/p/w500/" + json[6]);
                 }
-        </script>
-    </head>
-    <body>
-        <img id="back" height="auto" width="100%">
-        @navBar
-        <div id="movieMainDiv" class="container-fluid">
-            <div class="row">
-                <div id="trailerDiv" class="col-lg-8 text-center">
-                    <iframe id="trailer"></iframe>
-                </div>
-                <div id="movieDetails" class="col-lg-4">
-                    <h2 id="title"></h2>
-                    <img id="poster" height="180" width="150">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h4 id="release"></h4>
-                        </div>
-                        <div class="col-sm-6">
-                            <h4 id="runtime"></h4>
-                        </div>
-                    </div>
-                    <h4 id="genre"></h4>
-                    <hr>
-                    <p id="overview"></p>
-                    <br>
-                    <br>
-                    <input id="bookNowButton" type="submit" onclick="location.href = '@controllers.routes.Application.showMovies';"
-                    value="Book Now"/>
-                </div>
-                <br>
+                $("#title").html(json[0]);
+                $("#overview").html(json[1]);
+                $("#poster").attr("src", "https://image.tmdb.org/t/p/w500/" + json[2]);
+                $("#release").html("Release date: " + json[3]);
+                if (json[4] !== null) $("#runtime").html("Runtime: " + json[4] + " mins");
+                if (json[5] === null) $("#trailerDiv").html("<h3 class='text-center'> No trailer available</h3>");
+                else $("#trailer").attr("src", "https://www.youtube.com/embed/" + json[5]);
+                let allGenre = "Genre: ";
+                for (let i = 7; i < json.length; i++) {
+                    if (i == json.length - 1) {
+                        allGenre += json[i];
+                    } else {
+                        allGenre += json[i] + ", ";
+                    }
+                }
+                $("#genre").html(allGenre);
+            }
+    </script>
+} {
+    <img id="back" height="auto" width="100%">
+    <div id="movieMainDiv" class="container-fluid">
+        <div class="row">
+            <div id="trailerDiv" class="col-lg-8">
+                <iframe id="trailer"></iframe>
             </div>
             <br>
+            <br>
+            <br>
+            <div id="moveDetails" class="col-lg-4">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2 id="title"></h2>
+                    </div>
+                    <div class="col-sm-4">
+                        <img id="poster" height="180" width="150">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4 id="release"></h4>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4 id="runtime"></h4>
+                    </div>
+                </div>
+                <h4 id="genre"></h4>
+                <hr>
+                <p id="overview"></p>
+                <br>
+                <br>
+                <input id="bookNowButton" type="submit" onclick="location.href = '@controllers.routes.Application.showMovies()';"
+                value="Book Now"/>
+            </div>
         </div>
-        <br>
-        <br>
-    @footer
-    </body>
-</html>
+    </div>
+    <br>
+    <br>
+    <br>
+}
