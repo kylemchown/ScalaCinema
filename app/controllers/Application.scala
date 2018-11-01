@@ -1,5 +1,4 @@
 package controllers
-
 import models.GetMovies
 import play.api.mvc._
 
@@ -20,7 +19,6 @@ import akka.util.ByteString
 import scala.concurrent.ExecutionContext
 import scala.concurrent.ExecutionContext.Implicits.global
 import play.api.libs.json._
-
 class Application @Inject() (ws: WSClient) extends Controller {
 
 
@@ -39,8 +37,13 @@ class Application @Inject() (ws: WSClient) extends Controller {
       Ok(views.html.test("Home Page")(id)(response.body))
     }
   }
-
    def movieDetails(id: String) = Action {
     Ok(views.html.movie(GetMovies.movieDetails(id)))
+  }
+
+  def searchMovie(name: String)=Action.async{
+    ws.url("https://api.themoviedb.org/3/movie/now_playing?api_key=1c51d67c43ed71cbaa90f4a967f68650&language=en-US&page=1").get().map{response =>
+      Ok(views.html.searchResults("result page")(response.body)(name))
+    }
   }
 }

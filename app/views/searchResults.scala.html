@@ -1,0 +1,12 @@
+@(message: String)(response: String)(name: String)
+@import play.api.libs.json.JsValue
+<html>
+    <body>
+    @for(i <- 0 to response.split("},").length -2){
+        @if(response.split("},")(i).split("title\":\"")(1).split("\",\"")(0) contains name){
+             <a onclick="window.location.href=/movieinfo/+@response.split("},")(i).split("id\":\"")(1).split("\",\"")(0)">
+             @response.split("},")(i).split("title\":\"")(1).split("\",\"")(0)</a>
+        }
+    }
+    </body>
+</html>

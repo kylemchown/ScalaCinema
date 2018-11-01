@@ -13,3 +13,5 @@ GET        /movieinfo/:id        controllers.Application.movieDetails(id:String)
 GET        /assets/*file         controllers.Assets.at(path="/public", file)
 
 GET        /movieinfo/:id        controllers.Application.movieDetails(id:String)
+
+GET         /searchResults/:name controllers.Application.searchMovie(name: String)
