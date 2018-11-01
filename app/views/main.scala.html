@@ -1,7 +1,7 @@
-@(title: String)(head: Html)(content: Html)(form:Form[GetSearch])
-
+@(title: String, form:Form[GetSearch]=GetSearch.createSearchForm )(head: Html)(content: Html)
+@import play.api.Play.current
+@import play.api.i18n.Messages.Implicits._
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>@title</title>
@@ -24,12 +24,15 @@
                     <li><a>Whats On</a></li>
                     <li><a>Location</a></li>
                     <li><a>Upcoming</a></li>
-
+                    @helper.form(routes.Application.searchResult()){
+                        @helper.inputText(form("name"))
+                    <button type="submit">Search</button>
+                    }
                 </ul>
             </div>
         </header>
         @content
-    <footer>
+    <footer class="footer">
         <div class="ContactBar">
             <ul id="ContactInfoList">
                 <li class="li1">
