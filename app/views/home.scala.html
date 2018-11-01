@@ -1,10 +1,20 @@
 @import play.api.libs.json.JsValue
 @(message: String)(response: String)
 
-
 @main("Welcome to Cinema") {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/home.css")">
+    <script>
+            $(window).resize(function() {
+                if ($(this).width() < screen.width-80) {
+                    $('#advertToRight').hide();
+                    $('#advertLeft').hide();
+                } else {
+                    $('#advertToRight').show();
+                    $('#advertLeft').show();
+                }
+            });
+    </script>
 } {
     <div id="advertToRight" class="row" onclick="window.location.href = /movieinfo/ + @response.split("},")(1).split("id\":")(1).split(",\"")(0)">
         <div class="col-lg-3">
