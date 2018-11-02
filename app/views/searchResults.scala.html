@@ -11,7 +11,7 @@
         <html>
             <body>
             @for(i <- 0 to response.split("},").length - 2) {
-                @if(response.split("},")(i).split("title\":\"")(1).split("\",\"")(0) contains name) {
+                @if(response.split("},")(i).split("title\":\"")(1).split("\",\"")(0).toLowerCase contains name.toLowerCase) {
                     <div class="searchResult">
                         <a class="searchLink" onclick="window.location.href=/movieinfo/ + @response.split("},")(i).split("id\":")(1).split(",\"")(0)">
                    @response.split("},")(i).split("title\":\"")(1).split("\",\"")(0)

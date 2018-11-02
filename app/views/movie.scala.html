@@ -6,6 +6,7 @@
     <script>
             window.onload = function () {
                 let json = JSON.parse(@Html(Json.stringify(Json.toJson(moviedata))));
+                console.log(json)
                 if (json === "No Movie") window.location.replace('@controllers.routes.Application.showMovies()');
                 if (json[6] === null) $("body").css('background-color', 'black');
                 else {

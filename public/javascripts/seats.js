@@ -56,7 +56,7 @@ function httpGets()
 
 }
 
-window.onload = function() {
+window.onload = function () {
 
     var a = httpGets();
     console.log(a);
