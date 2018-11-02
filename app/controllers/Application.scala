@@ -19,12 +19,9 @@ import scala.concurrent.Future
 import scala.util.{Failure, Success}
 
 
-class Application @Inject()(val messagesApi: MessagesApi, environment: play.api.Environment) extends Controller with I18nSupport {
+class Application @Inject()(val messagesApi: MessagesApi, environment: play.api.Environment, ws: WSClient) extends Controller with I18nSupport {
   val seatTable = TableQuery[Seat]
   val db = Database.forConfig("mysqlDB")
-
-
-class Application @Inject() (ws: WSClient) extends Controller {
 
 
   def showMovies = Action.async {
