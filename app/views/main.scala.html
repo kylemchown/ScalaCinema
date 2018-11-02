@@ -24,9 +24,10 @@
                     <li><a>Whats On</a></li>
                     <li><a>Location</a></li>
                     <li><a>Upcoming</a></li>
+                    <li>
                     @helper.form(routes.Application.searchResult()){
-                        @helper.inputText(form("name"))
-                    <button type="submit">Search</button>
+                        @helper.inputText(form("name"))</li>
+                  <li class="searchButton">  <button  type="submit">Search</button></li>
                     }
                 </ul>
             </div>
