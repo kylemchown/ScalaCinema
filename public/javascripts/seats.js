@@ -56,7 +56,7 @@ function httpGets()
 
 }
 
-function showSeats() {
+window.onload = function() {
 
     var a = httpGets();
     console.log(a);
