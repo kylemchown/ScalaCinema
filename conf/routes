@@ -17,8 +17,10 @@ GET     /listSeats                  controllers.Application.lists
 
 # Map static resources from the /public folder to the /assets URL path
 
+
+GET        /searchResult/         controllers.Application.searchResult
+
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 
 GET        /movieinfo/:id        controllers.Application.movieDetails(id:String)
-

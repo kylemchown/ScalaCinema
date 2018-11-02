@@ -1,0 +1,24 @@
+@(message: String)(response: String)(name: String)
+@import play.api.libs.json.JsValue
+    @main("Welcome to Play") {
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/searchResult.css")">
+
+    } {
+
+        <html>
+            <body>
+            @for(i <- 0 to response.split("},").length - 2) {
+                @if(response.split("},")(i).split("title\":\"")(1).split("\",\"")(0) contains name) {
+                    <div class="searchResult">
+                        <a class="searchLink" onclick="window.location.href=/movieinfo/ + @response.split("},")(i).split("id\":")(1).split(",\"")(0)">
+                   @response.split("},")(i).split("title\":\"")(1).split("\",\"")(0)
+                        </a>
+                    </div>
+                }
+            }
+            </body>
+        </html>
+    }
