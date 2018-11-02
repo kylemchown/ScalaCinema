@@ -1,4 +1,16 @@
 package controllers
+import models.{GetMovies, GetSearch}
+import javax.inject.Inject
+
+import scala.concurrent.Future
+import scala.concurrent.duration._
+import play.api.http.HttpEntity
+import akka.actor.ActorSystem
+import akka.actor.Status.Success
+import akka.japi.Option.Some
+import akka.stream.ActorMaterializer
+import akka.stream.scaladsl._
+import akka.util.ByteString
 
 import controllers.DatabaseConnection.{db, seatTable}
 import javax.inject.Inject
@@ -13,6 +25,7 @@ import models.Seat
 import slick.jdbc.MySQLProfile.api._
 
 import scala.concurrent.ExecutionContext.Implicits.global
+import play.api.libs.json._
 
 import scala.language.postfixOps
 import scala.concurrent.Future
@@ -67,9 +80,17 @@ class Application @Inject()(val messagesApi: MessagesApi, environment: play.api.
       Ok(views.html.test("Home Page")(id)(response.body))
     }
   }
-
    def movieDetails(id: String) = Action {
     Ok(views.html.movie(GetMovies.movieDetails(id)))
   }
 
+  def searchResult=Action(parse.form(GetSearch.createSearchForm)){request =>
+   val name:String = request.body.name
+    var r:String =""
+    ws.url("https://api.themoviedb.org/3/movie/now_playing?api_key=1c51d67c43ed71cbaa90f4a967f68650&language=en-US&page=1").get().map{response =>
+      r = response.body
+    }
+    Thread.sleep(1000)
+    Ok(views.html.searchResults("result page")(r)(name))
+  }
 }

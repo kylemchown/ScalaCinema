@@ -1,7 +1,7 @@
-@(title: String)(head: Html)(content: Html)
-
+@(title: String, form:Form[GetSearch]=GetSearch.createSearchForm )(head: Html)(content: Html)
+@import play.api.Play.current
+@import play.api.i18n.Messages.Implicits._
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>@title</title>
@@ -24,29 +24,31 @@
         <body>
         <section id = "stuff"></section>
         <header class="header">
-            <div class="navbar navbar-inverse navbar-fixed-top">
-                <div class="NavBar">
-                    <ul id="iteamList">
-                        <li onclick="location.href = '@controllers.routes.Application.showMovies';"><a>"Logo"</a></li>
-                        <li onclick="location.href = '@controllers.routes.Application.showMovies';"><a>Whats On</a></li>
-                        <li><a>Location</a></li>
-                        <li><a>Upcoming</a></li>
-                    </ul>
-                </div>
+            <div class="NavBar">
+                <ul id="iteamList">
+                    <li onclick="location.href = '@controllers.routes.Application.showMovies';"><a>"Logo"</a></li>
+                    <li onclick="location.href = '@controllers.routes.Application.showMovies';"><a>Whats On</a></li>
+                    <li><a>Location</a></li>
+                    <li><a>Upcoming</a></li>
+                    <li>
+                    @helper.form(routes.Application.searchResult()){
+                        @helper.inputText(form("name"))</li>
+                  <li class="searchButton">  <button  type="submit">Search</button></li>
+                    }
+                </ul>
             </div>
         </header>
 
         @content
-        <footer>
-            <br>
-            <div class="ContactBar">
-                <ul id="ContactInfoList">
-                    <li class="li1">
-                        <div class="ContactItem">
-                            <h1>Contact Us</h1>
-                            <p>
-                                Tel : 07709987<br/>
-                                Email : QaCinema&#64;qacinema.com<br/>
+    <footer class="footer">
+        <div class="ContactBar">
+            <ul id="ContactInfoList">
+                <li class="li1">
+                    <div class="ContactItem">
+                        <h1>Contact Us</h1>
+                        <p>
+                            Tel : 07709987<br/>
+                            Email : QaCinema&#64;qacinema.com<br/>
                                 <a>FAQ</a>
                             </p>
                         </div>

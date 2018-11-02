@@ -1,0 +1,13 @@
+.searchResult{
+    background-color: #000000;
+}
+.searchLink{
+    color: #FFFFFF;
+    transition: text-shadow 0.5s, color 0.5s;
+}
+.searchLink:hover{
+    cursor: pointer;
+    color: #179422;
+    text-decoration: none;
+    text-shadow: 0px 0px 12px #179422;
+}
