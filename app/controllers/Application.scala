@@ -75,4 +75,4 @@ class Application @Inject() (ws: WSClient) extends Controller {
     Ok(views.html.movie(GetMovies.movieDetails(id)))
   }
 
-}
+}}
