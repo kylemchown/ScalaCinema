@@ -15,12 +15,10 @@
         <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.4.2/css/all.css' integrity='sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns' crossorigin='anonymous'>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <
   @head
     </head>
 
-
-        
-  
         <body>
         <section id = "stuff"></section>
         <header class="header">
@@ -28,7 +26,7 @@
                 <ul id="iteamList">
                     <li onclick="location.href = '@controllers.routes.Application.showMovies';"><a>"Logo"</a></li>
                     <li onclick="location.href = '@controllers.routes.Application.showMovies';"><a>Whats On</a></li>
-                    <li><a>Location</a></li>
+                    <li onclick="location.href = '@controllers.routes.Application.map';"><a>Location</a></li>
                     <li><a>Upcoming</a></li>
                     <li>
                     @helper.form(routes.Application.searchResult()){
