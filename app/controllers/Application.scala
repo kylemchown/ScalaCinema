@@ -77,6 +77,7 @@ class Application @Inject()(val messagesApi: MessagesApi, environment: play.api.
 
   def map = Action {
     Ok(views.html.map("Your new application is ready."))
+  }
 
 
   def movieInfo(id: String) = Action.async {
