@@ -1,42 +1,85 @@
 @import play.api.libs.json.JsValue
 @(message: String)(response: String)
 
-
-@main("Welcome to Play") {
-
+@main("Welcome to Cinema") {
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/home.css")">
+    <script>
+        //Onload if screen width is below certain size, hide adverts
+        window.onload = function(){
+            if (window.innerWidth < screen.width-100){
+                $('#advertToRight').hide();
+                $('#advertLeft').hide();
+            }
+        };
+        //If window size below certain point, hide adverts
+        $(window).resize(function() {
+            if (($(this).width() < screen.width-80)) {
+                $('#advertToRight').hide();
+                $('#advertLeft').hide();
+            } else {
+                $('#advertToRight').show();
+                $('#advertLeft').show();
+            }
+        });
+    </script>
+} {
 
-}{
+    <div id="advertToRight" class="row" onclick="window.location.href = /movieinfo/ + @response.split("},")(1).split("id\":")(1).split(",\"")(0)">
+        <div class="col-lg-3">
+            <div class="affix">
+                <img src=https://image.tmdb.org/t/p/w500/@response.split("},")(1).split("poster_path\":\"")(1).split("\",\"")(0).substring(1) class="img-responsive" class="img-responsive"
+                style="width: 95%;
+                    height: 250px;
+                    border: 2px groove white;" alt="Image">
+                <div id="rightAdvertText">
+                    <h3 class="cinemaNow">In cinemas<br>now!</h3>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="everything">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-        <ol class="carousel-indicators">
-            @for(i <- 0 to response.split("},").length -3){
-                @if(i == 0){
+    <div id="advertLeft" class="row" onclick="window.location.href = /movieinfo/ + @response.split("},")(0).split("id\":")(1).split(",\"")(0)">
+        <div class="col-lg-3">
+            <div class="affix">
+                <img src=https://image.tmdb.org/t/p/w500/@response.split("},")(0).split("poster_path\":\"")(1).split("\",\"")(0).substring(1) class="img-responsive"
+                style="width: 35%;
+                    height: 250px;
+                    border: 2px groove white;" alt="Image">
+                <div id="advertText">
+                    <h3 class="cinemaNow">In cinemas<br>now!</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="everything">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+            <ol class="carousel-indicators">
+            @for(i <- 0 to response.split("},").length - 3) {
+                @if(i == 0) {
                     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                 }
-                @if(i>0){
+                @if(i > 0) {
                     <li data-target="#myCarousel" data-slide-to=@i></li>
                 }
             }
-        </ol>
+            </ol>
 
-            <!-- Wrapper for slides -->
-        <div class="carousel-inner">
+                <!-- Wrapper for slides -->
+            <div class="carousel-inner">
 
 
-            @for(i <- 0 to response.split("},").length -2){
-                @if(i==0 && response.split("},")(i).split("backdrop_path\":")(1).split(",\"")(0).substring(1).length > 5) {
+            @for(i <- 0 to response.split("},").length - 2) {
+                @if(i == 0 && response.split("},")(i).split("backdrop_path\":")(1).split(",\"")(0).substring(1).length > 5) {
                     <div class="item active">
                         <div class="carousel-content">
                         </div>
                         <img src=https://image.tmdb.org/t/p/w500/@response.split("},")(i).split("backdrop_path\":")(1).split(",\"")(0).substring(2).dropRight(1) alt="Chicago">
                     </div>
                 }
-                @if(i!=0 && response.split("},")(i).split("backdrop_path\":")(1).split(",\"")(0).substring(1).length > 5){
+                @if(i != 0 && response.split("},")(i).split("backdrop_path\":")(1).split(",\"")(0).substring(1).length > 5) {
                     <div class="item">
                         <div class="carousel-content">
                         </div>
@@ -46,65 +89,61 @@
 
             }
 
+            </div>
+
+                <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
 
-            <!-- Left and right controls -->
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
 
+        @for(i <- 0 to response.split("},").length - 2) {
+            @if(i == 0) {
+                <div class="container">
+                    <div class="row">
+                    }
+            @if(i % 3 == 0 && i != 0) {
+            </div>
+            </div><br>
 
-    @for(i <- 0 to response.split("},").length -2){
-        @if(i == 0) {
-            <div class="container">
-                <div class="row">
-                }
-        @if(i%3 == 0 && i!= 0){
-        </div>
-        </div><br>
+                <div class="container">
+                    <div class="row">
+                    }
 
-            <div class="container">
-                <div class="row">
-                }
+            <div class="col-sm-4">
+                <div class="panel panel-primary" style="border-color: #000000;">
+                    <div class="panel-body" onclick="window.location.href = /movieinfo/ + @response.split("},")(i).split("id\":")(1).split(",\"")(0)">
+                        <div class="abc">
+                            <img src=https://image.tmdb.org/t/p/w500/@response.split("},")(i).split("poster_path\":\"")(1).split("\",\"")(0).substring(1) class="img-responsive" style="width: 100%" alt="Image">
+                            <div class="overlay">
+                                <div class="poster-text">@response.split("},")(i).split("original_title\":\"")(1).split("\",\"")(0)
+                                <br/>
+                                    @if(response.split("},")(i).split("overview\":\"")(1).split("\",\"")(0).length <= 50) {
+                                        @response.split("},")(i).split("overview\":\"")(1).split("\",\"")(0)
+                                    }
+                                    @if(response.split("},")(i).split("overview\":\"")(1).split("\",\"")(0).length > 50) {
+                                        @response.split("},")(i).split("overview\":\"")(1).split("\",\"")(0).substring(0, 50)
+                                        ...
+                                    }
+                                </div>
 
-        <div class="col-sm-4">
-            <div class="panel panel-primary" style="border-color: #000000;">
-                <div class="panel-body" onclick="window.location.href=/movieinfo/ + @response.split("},")(i).split("id\":")(1).split(",\"")(0)">
-                    <div class="abc">
-                        <img src=https://image.tmdb.org/t/p/w500/@response.split("},")(i).split("poster_path\":\"")(1).split("\",\"")(0).substring(1) class="img-responsive" style="width:100%" alt="Image">
-                        <div class="overlay">
-                            <div class="poster-text">@response.split("},")(i).split("original_title\":\"")(1).split("\",\"")(0)
-                            <br/>
-                                @if(response.split("},")(i).split("overview\":\"")(1).split("\",\"")(0).length <= 50) {
-                                    @response.split("},")(i).split("overview\":\"")(1).split("\",\"")(0)
-                                }
-                                @if(response.split("},")(i).split("overview\":\"")(1).split("\",\"")(0).length > 50){
-                                    @response.split("},")(i).split("overview\":\"")(1).split("\",\"")(0).substring(0,50) ...
-                            }
                             </div>
-
                         </div>
                     </div>
+
                 </div>
-
             </div>
-        </div>
-        @if(i == response.split("},").length -2){
-        </div>
-        </div><br>
+            @if(i == response.split("},").length - 2) {
+            </div>
+            </div><br>
+                }
         }
-    }
 
-
-
-
-
-</div>
+    </div>
 }
-

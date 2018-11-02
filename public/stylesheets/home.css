@@ -16,7 +16,9 @@ footer {
     margin: auto;
 }
 
-
+body{
+    padding: 40px 0 0;
+}
 
 .abc:hover{
 
@@ -77,4 +79,32 @@ footer {
     opacity: 0.8;
 }
 
+#advertLeft{
+    position: absolute;
+    top: 40%;
+    left: 10px;
+}
 
+#advertToRight{
+    position: absolute;
+    top: 40%;
+    left: 90%;
+}
+
+#advertText{
+    top:0;
+    left:5%;
+    position: absolute;
+    text-align: center;
+}
+
+#rightAdvertText{
+    top:0;
+    left:10%;
+    position: absolute;
+    text-align: center;
+}
+
+.cinemaNow{
+    color: #d9d9d9;
+}
