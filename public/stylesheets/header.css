@@ -1,0 +1,38 @@
+h1{margin: 0px}
+.header{
+    background-color: #000000 ;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+.NavBar{
+    /*margin-right: 10%;*/
+    /*margin-left: 10%;*/
+    width: 100%;
+    height: 1%;
+    /*height: inherit;*/
+}
+#iteamList {
+    list-style-type: none;
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+    /*height: inherit;*/
+}
+#iteamList li{
+    float: left;
+}
+#iteamList li a{
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    transition: text-shadow 0.5s, color 0.5s;
+}
+#iteamList li a:hover{
+    cursor: pointer;
+    color: #179422;
+    text-decoration: none;
+    text-shadow: 0px 0px 12px #179422;
+}

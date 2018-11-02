@@ -1,0 +1,11 @@
+@(message: String)(id: String)(response: String)
+
+@main("Welcome to Play") {<h1></h1>}{
+
+    @for(i <- 0 to response.split("},").length -2){
+        @if(response.split("},")(i).contains(id)){
+            <h1>@response.split("},")(i)</h1>
+        }
+    }
+
+}
