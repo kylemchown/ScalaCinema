@@ -1,4 +1,5 @@
 @import play.api.libs.json.JsValue
+@import play.api.libs.json.Json
 @(message: String)(response: String)
 
 @main("Welcome to Cinema") {
@@ -6,11 +7,22 @@
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/home.css")">
     <script>
         //Onload if screen width is below certain size, hide adverts
-        window.onload = function(){
-            if (window.innerWidth < screen.width-100){
+        window.onload = function () {
+            if (window.innerWidth < screen.width - 100) {
                 $('#advertToRight').hide();
                 $('#advertLeft').hide();
             }
+            $.getJSON("https://api.themoviedb.org/3/genre/movie/list?api_key=487ca347f667dcb85f52d03ca278aded&language=en-UK",
+                    function (data) {
+                        $.each(data, function (key, value) {
+                            value.forEach(function (e) {
+                                $('#genreOptions')
+                                        .append($("<option></option>")
+                                                .attr("value", e.id)
+                                                .text(e.name));
+                            })
+                        });
+                    });
         };
         //If window size below certain point, hide adverts
         $(window).resize(function() {
@@ -102,6 +114,12 @@
         </div>
 
 
+        <select id="genreOptions">
+            <option value="0">All</option>
+        </select>
+
+        <div id="genreChange"></div>
+
         @for(i <- 0 to response.split("},").length - 2) {
             @if(i == 0) {
                 <div class="container">
@@ -110,9 +128,8 @@
             @if(i % 3 == 0 && i != 0) {
             </div>
             </div><br>
-
                 <div class="container">
-                    <div class="row">
+                    <div  class="row">
                     }
 
             <div class="col-sm-4">
@@ -145,4 +162,43 @@
         }
 
     </div>
+    <script>
+        $(function () {
+            let json = JSON.parse(@Html(Json.stringify(Json.toJson(response))));
+            console.log(json);
+            let optionValue;
+            $( "#genreOptions" ).change(function() {
+                // let optionValue = document.getElementById("genreOptions").value;
+                optionValue = $("#genreOptions").val();
+                console.log(optionValue);
+                if (optionValue === 0) $("#movieSection").show();
+                else $("#movieSection").hide();
+                creator()
+            });
+
+            function creator(){
+                // $("#genreChange").append()
+                for(let i =0; i < 4; i++){
+                $('#genreChange').html($('<div>', {class: 'container', id:'main'+i}));
+                $('#main'+i).html($('<div>', {class: 'row', id:'first'+i}));
+                $('#first'+i).html($('<div>', {class: 'col-sm-4', id:'box'+i}));
+                $('#box'+i).html($('<div>', {class: 'panel panel-primary', id:'panel'+i}));
+                // $('#panel'+i).css($('border-color',"#000000"));
+                $('#panel'+i).html($('<div>', {class: 'panel-body', id:'panelB'+i, onclick:"window.location.href = /"}));
+                // $('#panelB'+i).click(function () {
+                    // window.location.href = "/"
+                    // });
+                $('#panelB'+i).html($('<div>', {class: 'abc', id:'abcd'+i}));
+                $('#abcd'+i).html($('<img>', {id: 'img'+i}));
+                $("#img"+i).attr("src", "https://image.tmdb.org/t/p/w500/"+json.result[i].poster_path)
+                $('#abcd'+i).html($('<div>', {class: 'overlay', id:'overlay'+i}));
+                $('#overlay'+i).html($('<div>', {class: 'poster-text', id:'posterText'+i}));
+                $('#posterText'+i).html($('<p>', {id: 'text'+i}));
+                $("#text"+1).html("khaskddbsk");
+                $('#posterText'+i).html($('<p>', 'poster-overview'));
+                // $("#genreChange").html('<br>')
+                }
+            }
+        })
+    </script>
 }
