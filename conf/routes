@@ -3,9 +3,26 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+
+
+GET         /                    controllers.Application.showMovies
+
+GET    /drop                        controllers.Application.drop
+
+GET     /list                       controllers.Application.list
+
+GET     /book/:seat                 controllers.Application.book(seat: String)
+
+GET     /listSeats                  controllers.Application.lists
 
 GET     /map                           controllers.Application.map
 
 # Map static resources from the /public folder to the /assets URL path
+
+
+GET        /searchResult/         controllers.Application.searchResult
+
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+
+GET        /movieinfo/:id        controllers.Application.movieDetails(id:String)
